@@ -1,0 +1,30 @@
+{
+	"filters": {
+	  "filter_example": {
+		"param1": "const_param",
+		"condition": ">",
+		"param2": "example-new-param"
+	  }
+	},
+	"params": {
+		"min_high_price_1-5_monthly": {
+			"query": {
+			  "function": "SMA",
+			  "interval":"weekly",
+			  "time_period" : "10",
+			  "series_type": "open"
+			},
+			"value": {
+			  "position": "1",
+			  "key": "SMA"
+			},
+			"operation": "get"
+		  },	
+	  "const_param": 100,
+	  "param_from_params": {
+		"param1": "const_param",
+		"operation": "sum",
+		"param2": "example-new-param"
+	  }
+	}
+  }

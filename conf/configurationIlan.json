@@ -1,0 +1,578 @@
+{
+	"filters": {
+	  "sellers_candle_close_monthly": {
+		"param1": "price_high_monthly_sub_price_close_monthly_divide_by_two",
+		"condition": ">",
+		"param2": "price_close_monthly_sub_price_low_monthly"
+	  },
+	  "high_price_below_10_1_lower_bbands_monthly": {
+		"param1": "high_price_monthly",
+		"condition": "<",
+		"param2": "bbands_10_1_lower_monthly"
+	  },
+	  "buyers_candle_close_monthly": {
+		"param1": "price_high_monthly_sub_price_close_monthly_multiply_by_two",
+		"condition": "<",
+		"param2": "price_close_monthly_sub_price_low_monthly"
+	  },
+	  "low_price_above_20_2_upper_bbands_monthly": {
+		"param1": "price_high_monthly",
+		"condition": ">",
+		"param2": "bbands_upper_20_2_monthly"
+	  },
+	  "last_close_price_below_last_high_low_monthly": {
+		"param1": "price_close_monthly",
+		"condition": "<",
+		"param2": "find_last_high_low_price_monthly"
+	  },
+	  "last_close_price_below_SMA5_monthly": {
+		"param1": "price_close_monthly",
+		"condition": "<",
+		"param2": "SMA5_monthly"
+	  },
+	  "red_candle_close_monthly": {
+		"param1": "price_close_monthly",
+		"condition": "<",
+		"param2": "price_open_monthly"
+	  },
+	  "average_volume_14_above_million_daily": {
+		"param1": "average_volume_14_daily",
+		"condition": ">",
+		"param2": "million"
+	  },
+	  "resistance_become_support": {
+		"param1": "find_last_low_price_monthly",
+		"condition": ">=",
+		"param2": "find_sec_last_high_price_monthly"
+	  },
+	  "SMA10_slope_positive_monthly_part_2": {
+		"param1": "SMA10_monthly",
+		"condition": ">",
+		"param2": "SMA10_5_monthly"
+	  },
+	  "SMA5_slope_positive_monthly_part_2": {
+		"param1": "SMA5_monthly",
+		"condition": ">",
+		"param2": "SMA5_5_monthly"
+	  },
+	  "SMA10_slope_positive_monthly_part_1": {
+		"param1": "SMA10_1-5_monthly",
+		"condition": ">",
+		"param2": "SMA10_1-10_monthly"
+	  },
+	  "SMA5_slope_positive_monthly_part_1": {
+		"param1": "SMA5_1-5_monthly",
+		"condition": ">",
+		"param2": "SMA5_1-10_monthly"
+	  },
+	  "SMA5_momentum_stronger_than_SMA10_momentum_monthly": {
+		"param1": "SMA5_average_differences_monthly",
+		"condition": ">",
+		"param2": "SMA10_average_differences_monthly"
+	  },
+	  "SMA5_above_SMA10_monthly": {
+		"param1": "SMA5_monthly",
+		"condition": ">",
+		"param2": "SMA10_monthly"
+	  },
+	  "average_volume_14_trend_up_monthly": {
+		"param1": "average_volume_14_monthly",
+		"condition": ">",
+		"param2": "average_volume_28_monthly"
+	  },
+	  "lows_up_trend": {
+		"param1": "find_last_low_price_monthly",
+		"condition": ">",
+		"param2": "find_sec_last_low_price_monthly"
+	  },
+	  "high_up_trend": {
+		"param1": "find_last_high_price_monthly",
+		"condition": ">",
+		"param2": "find_sec_last_high_price_monthly"
+	  },
+	  "green_candle_close_monthly": {
+		"param1": "price_close_monthly",
+		"condition": ">",
+		"param2": "price_open_monthly"
+	  },
+	  "green_candle_high_below_10_1_bbands_monthly": {
+		"param1": "high_price_monthly",
+		"condition": "<",
+		"param2": "bbands_10_1_lower_monthly"
+	  },
+	  "last_close_price_above_SMA5_monthly": {
+		"param1": "price_close_monthly",
+		"condition": ">",
+		"param2": "SMA5_monthly"
+	  },
+	  "risk_reward_monthly": {
+		"param1": "price_close_monthly_sub_last_low_monthly_divide_price_close_monthly_sub_last_low_monthly",
+		"condition": ">",
+		"param2": "one_and_half"
+	  },
+	  "last_close_price_above_last_low_high_monthly": {
+		"param1": "price_close_monthly",
+		"condition": ">",
+		"param2": "find_last_low_high_price_monthly"
+	  },
+	  "buy_signal_option": [
+		"last_close_price_above_last_low_high_monthly",
+		"last_close_price_above_SMA5_monthly",
+		"green_candle_high_below_10_1_bbands_monthly",
+		"buyers_candle__high_below_10_1_bbands_monthly"
+	  ]
+	},
+	"params": {
+	  "price_low_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "3. low"
+		},
+		"operation": "get"
+	  },
+	  "bbands_10_1_lower_monthly": {
+		"query": {
+		  "function": "BBANDS",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close",
+		  "nbdevup": "1",
+		  "nbdevdn": "1"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "Real Lower Band"
+		},
+		"operation": "get"
+	  },
+	  "bbands_20_2_higher_monthly": {
+		"query": {
+		  "function": "BBANDS",
+		  "interval": "monthly",
+		  "time_period": "20",
+		  "series_type": "close",
+		  "nbdevup": "2",
+		  "nbdevdn": "2"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "Real Upper Band"
+		},
+		"operation": "get"
+	  },
+	  "price_high_monthly_sub_price_close_monthly_multiply_by_two": {
+		"param1": "price_high_monthly_sub_price_close_monthly",
+		"operation": "multiply",
+		"param2": "two"
+	  },
+	  "price_high_monthly_sub_price_close_monthly": {
+		"param1": "price_high_monthly",
+		"operation": "sub",
+		"param2": "price_close_monthly"
+	  },
+	  "price_close_monthly_sub_price_low_monthly": {
+		"param1": "price_close_monthly",
+		"operation": "sub",
+		"param2": "price_low_monthly"
+	  },
+	  "price_high_monthly_sub_price_close_monthly_divide_by_two": {
+		"param1": "price_high_monthly_sub_price_close_monthly",
+		"operation": "divide",
+		"param2": "two"
+	  },
+	  "million": 1000000,
+	  "two": 2,
+	  "average_volume_14_daily": {
+		"query": {
+		  "function": "TIME_SERIES_DAILY"
+		},
+		"value": {
+		  "position": "1-14",
+		  "key": "5. volume"
+		},
+		"operation": "average"
+	  },
+	  "find_last_low_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "3. low"
+		},
+		"operation": "find_last_low"
+	  },
+	  "find_sec_last_high_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "2. high"
+		},
+		"operation": "find_second_last_high"
+	  },
+	  "SMA10_1-10_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-10",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA10_5_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "5",
+		  "key": "SMA"
+		},
+		"operation": "get"
+	  },
+	  "SMA5_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "SMA"
+		},
+		"operation": "get"
+	  },
+	  "SMA5_5_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "5",
+		  "key": "SMA"
+		},
+		"operation": "get"
+	  },
+	  "SMA10_1-5_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA5_1-10_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-10",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA5_1-5_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA10_average_differences_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA5_average_differences_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "SMA"
+		},
+		"operation": "average_differences"
+	  },
+	  "SMA10_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "10",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "SMA"
+		},
+		"operation": "get"
+	  },
+	  "average_volume_14_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-14",
+		  "key": "5. volume"
+		},
+		"operation": "average"
+	  },
+	  "average_volume_28_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-28",
+		  "key": "5. volume"
+		},
+		"operation": "average"
+	  },
+	  "find_sec_last_low_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "3. low"
+		},
+		"operation": "find_second_last_low"
+	  },
+	  "find_last_high_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "2. high"
+		},
+		"operation": "find_last_high"
+	  },
+	  "find_last_high_low_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "3. low"
+		},
+		"operation": "find_last_high"
+	  },
+	  "min_high_price_1-5_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "2. high"
+		},
+		"operation": "min"
+	  },
+	  "minus_hundred": -100,
+	  "CCI5_min_monthly": {
+		"query": {
+		  "function": "CCI",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "CCI"
+		},
+		"operation": "min"
+	  },
+	  "SMA5_2_monthly": {
+		"query": {
+		  "function": "SMA",
+		  "interval": "monthly",
+		  "time_period": "5",
+		  "series_type": "close"
+		},
+		"value": {
+		  "position": "2",
+		  "key": "SMA"
+		},
+		"operation": "get"
+	  },
+	  "min_close_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-5",
+		  "key": "4. close"
+		},
+		"operation": "min"
+	  },
+	  "price_high_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "2. high"
+		},
+		"operation": "get"
+	  },
+	  "price_open_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "1. open"
+		},
+		"operation": "get"
+	  },
+	  "one_and_half": 1.5,
+	  "price_close_monthly_sub_last_low_monthly_divide_price_close_monthly_sub_last_low_monthly": {
+		"param1": "last_high_monthly_sub_price_close_monthly",
+		"operation": "divide",
+		"param2": "price_close_monthly_sub_last_low_monthly"
+	  },
+	  "price_close_monthly_sub_last_low_monthly": {
+		"param1": "price_close_monthly",
+		"operation": "sub",
+		"param2": "find_last_low_price_monthly"
+	  },
+	  "last_high_monthly_sub_price_close_monthly": {
+		"param1": "find_last_high_price_monthly",
+		"operation": "sub",
+		"param2": "price_close_monthly"
+	  },
+	  "find_last_low_high_price_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1-999",
+		  "key": "2. high"
+		},
+		"operation": "find_last_low"
+	  },
+	  "price_close_monthly": {
+		"query": {
+		  "function": "TIME_SERIES_MONTHLY"
+		},
+		"value": {
+		  "position": "1",
+		  "key": "4. close"
+		},
+		"operation": "get"
+	  }
+	},
+	"signals": {
+	  "BUY_SIGNAL": {
+	  "filters": [
+		[
+		  [
+			"last_close_price_above_last_low_high_monthly",
+			"green_candle_close_monthly"
+		  ],
+		  [
+			"last_close_price_above_SMA5_monthly",
+			"green_candle_close_monthly"
+		  ],
+		  [
+			"high_price_below_10_1_lower_bbands_monthly",
+			"buyers_candle_close_monthly"
+		  ],
+		  [
+			"high_price_below_10_1_lower_bbands_monthly",
+			"green_candle_close_monthly"
+		  ]
+		]
+	  ]
+	},
+	  	"SELL_SIGNAL": {
+	  "filters": [
+		[
+		  "last_close_price_below_last_high_low_monthly",
+		  "red_candle_close_monthly"
+		],
+		[
+		  "last_close_price_below_SMA5_monthly",
+		  "red_candle_close_monthly"
+		],
+		[
+		  "low_price_above_20_2_higher_bbands_monthly",
+		  "sellers_candle_close_monthly"
+		],
+		[
+		  "red_candle_close_monthly",
+		  "low_price_above_20_2_higher_bbands_monthly"
+		]
+	  ]
+	},
+		"TECHNICAL_CORRECTION": {
+	  "filters": [
+		[
+		  "at_least_1_candle_below_high_candle_low_monthly",
+		  "CCI5_below_100_monthly",
+		  "SMA5_pointing_down_monthly",
+		  "correction_below_SMA5_monthly"
+		]
+	  ]
+	},
+	
+		"FIND_STOCK_MONTHLY": {
+	  "filters": [
+		[
+		  "average_volume_14_above_million_daily",
+		  "resistance_become_support",
+		  "SMA10_slope_positive_monthly_part_2",
+		  "SMA5_slope_positive_monthly_part_2",
+		  "SMA10_slope_positive_monthly_part_1",
+		  "SMA5_slope_positive_monthly_part_1",
+		  "SMA5_momentum_stronger_than_SMA10_momentum_monthly",
+		  "SMA5_above_SMA10_monthly",
+		  "average_volume_14_trend_up_monthly",
+		  "lows_up_trend",
+		  "high_up_trend"
+		]
+	  ]
+	}
+
+
+	},
+	"entity_signals": [[],[]]
+
+  }
